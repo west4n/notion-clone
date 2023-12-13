@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button'
 
 export const Heading = () => {
 	return (
-		<div className='max-w-3xl space-y-4'>
+		<div className='max-w-4xl space-y-4'>
 			<h1 className='sm:text-5xl md:text-6xl text-3xl font-bold'>
-				Ваши идеи, документы и планы. Собраны вместе. Добро пожаловать в{' '}
+				Ваши документы и планы. Вместе. Добро пожаловать в{' '}
 				<span className='underline'>Jotion</span>
 			</h1>
 
