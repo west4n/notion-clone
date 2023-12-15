@@ -3,8 +3,14 @@
 import { ArrowRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { useConvexAuth } from 'convex/react'
+import { Spinner } from '@/components/spinner'
+import Link from 'next/link'
+import { SignInButton } from '@clerk/clerk-react'
 
 export const Heading = () => {
+	const { isAuthenticated, isLoading } = useConvexAuth()
+
 	return (
 		<div className='max-w-4xl space-y-4'>
 			<h1 className='sm:text-5xl md:text-6xl text-3xl font-bold'>
@@ -17,11 +23,29 @@ export const Heading = () => {
 				<br />
 				работа идет лучше и быстрее.
 			</h3>
-
-			<Button>
-				Зайти в Jotion
-				<ArrowRight className='h-4 w-4 ml-2' />
-			</Button>
+			{isLoading && (
+				<div className='w-full flex items-center justify-center'>
+					<Spinner size='lg' />
+				</div>
+			)}
+			{isAuthenticated && !isLoading && (
+				<Button asChild>
+					<Link href='/documents'>
+						Перейти в Jotion
+						<ArrowRight className='h-4 w-4 ml-2' />
+					</Link>
+				</Button>
+			)}
+			{!isAuthenticated && !isLoading && (
+				<>
+					<SignInButton mode='modal'>
+						<Button>
+							Получить Jotion
+							<ArrowRight className='h-4 w-4 ml-2' />
+						</Button>
+					</SignInButton>
+				</>
+			)}
 		</div>
 	)
 }
